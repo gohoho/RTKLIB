@@ -484,7 +484,6 @@ extern int strsvrstart(strsvr_t *svr, int *opts, int *strs, char **paths,
     if (!(svr->buff=(unsigned char *)malloc(svr->buffsize))||
         !(svr->pbuf=(unsigned char *)malloc(svr->buffsize))) {
         free(svr->buff); free(svr->pbuf);
-        fprintf(stderr, "malloc proble\n");
         return 0;
     }
     /* open streams */
@@ -494,13 +493,11 @@ extern int strsvrstart(strsvr_t *svr, int *opts, int *strs, char **paths,
         if (i>0&&*file1&&!strcmp(file1,file2)) {
             sprintf(svr->stream[i].msg,"output path error: %s",file2);
             for (i--;i>=0;i--) strclose(svr->stream+i);
-            fprintf(stderr, "input and output are the same\n");
             return 0;
         }
         rw=i==0?STR_MODE_R:STR_MODE_W;
         if (strs[i]!=STR_FILE) rw|=STR_MODE_W;
         if (stropen(svr->stream+i,strs[i],rw,paths[i])) continue;
-        fprintf(stderr, "can't open stream\n");
         for (i--;i>=0;i--) strclose(svr->stream+i);
         return 0;
     }
@@ -514,7 +511,6 @@ extern int strsvrstart(strsvr_t *svr, int *opts, int *strs, char **paths,
     if (pthread_create(&svr->thread,NULL,strsvrthread,svr)) {
 #endif
         for (i=0;i<svr->nstr;i++) strclose(svr->stream+i);
-        fprintf(stderr, "can't create thread\n");
         return 0;
     }
     return 1;

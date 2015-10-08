@@ -534,7 +534,6 @@ static file_t *openfile(const char *path, int mode, char *msg)
     char *p;
     int timetag=0;
     
-    fprintf(stderr, "can't open file\n");
     tracet(3,"openfile: path=%s mode=%d\n",path,mode);
     
     if (!(mode&(STR_MODE_R|STR_MODE_W))) return NULL;
@@ -1451,13 +1450,9 @@ static ntrip_t *openntrip(const char *path, int type, char *msg)
     int i;
     char addr[256]="",port[256]="",tpath[MAXSTRPATH];
     
-    fprintf(stderr, "openntrip\n");
     tracet(3,"openntrip: path=%s type=%d\n",path,type);
     
-    if (!(ntrip=(ntrip_t *)malloc(sizeof(ntrip_t)))) {
-        fprintf(stderr, "can't malloc ntrip_t\n");
-        return NULL;
-    }
+    if (!(ntrip=(ntrip_t *)malloc(sizeof(ntrip_t)))) return NULL;
     
     ntrip->state=0;
     ntrip->type=type; /* 0:server,1:client */
@@ -1485,10 +1480,8 @@ static ntrip_t *openntrip(const char *path, int type, char *msg)
     if (!(ntrip->tcp=opentcpcli(tpath,msg))) {
         tracet(1,"openntrip: opentcp error\n");
         free(ntrip);
-        fprintf(stderr, "can't open ntrip\n");
         return NULL;
     }
-    fprintf(stderr, "opened ok\n");
     return ntrip;
 }
 /* close ntrip ---------------------------------------------------------------*/
