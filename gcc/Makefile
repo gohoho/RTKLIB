@@ -11,7 +11,7 @@ CTARGET=
 
 OPTION = -DENAGLO -DENAGAL -DENAQZS -DENACMP -DTRACE \
 		 -DNFREQ=3 -DNEXOBS=3
-CFLAGS = -fPIC -Wall -O3 -ansi -pedantic \
+CFLAGS = -fPIC -fvisibility=hidden -Wall -O3 -ansi -pedantic \
 		 -Wno-unused-but-set-variable \
 		 -I$(SRC) $(OPTION) $(CTARGET) -g
 LDLIBS  = -lm -lrt -lpthread
