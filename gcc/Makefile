@@ -11,12 +11,13 @@ CTARGET=
 
 OPTION = -DENAGLO -DENAGAL -DENAQZS -DENACMP -DTRACE \
 		 -DNFREQ=3 -DNEXOBS=3
-CFLAGS = -fPIC -fvisibility=hidden -Wall -O3 -ansi -pedantic \
+CFLAGS = -fPIC -Wall -O3 -ansi -pedantic \
 		 -Wno-unused-but-set-variable \
 		 -I$(SRC) $(OPTION) $(CTARGET) -g
+
 LDLIBS  = -lm -lrt -lpthread
 
-LDFLAGS = -shared  # linking flags
+LDFLAGS = -shared -Wl,--version-script=export.map
 
 all        	 : $(TARGET_LIB)
 $(TARGET_LIB): stream.o rtkcmn.o solution.o sbas.o geoid.o

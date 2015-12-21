@@ -1276,7 +1276,7 @@ extern double dot (const double *a, const double *b, int n);
 extern double norm(const double *a, int n);
 extern void cross3(const double *a, const double *b, double *c);
 extern int  normv3(const double *a, double *b);
-__attribute__ ((visibility ("default"))) extern void matcpy(double *A, const double *B, int n, int m);
+extern void matcpy(double *A, const double *B, int n, int m);
 extern void matmul(const char *tr, int n, int k, int m, double alpha,
                    const double *A, const double *B, double beta, double *C);
 extern int  matinv(double *A, int n);
@@ -1303,15 +1303,15 @@ extern gtime_t gst2time(int week, double sec);
 extern double  time2gst(gtime_t t, int *week);
 extern gtime_t bdt2time(int week, double sec);
 extern double  time2bdt(gtime_t t, int *week);
-__attribute__ ((visibility ("default"))) extern char    *time_str(gtime_t t, int n);
+extern char    *time_str(gtime_t t, int n);
 
 extern gtime_t timeadd  (gtime_t t, double sec);
 extern double  timediff (gtime_t t1, gtime_t t2);
 extern gtime_t gpst2utc (gtime_t t);
-__attribute__ ((visibility ("default"))) extern gtime_t utc2gpst (gtime_t t);
+extern gtime_t utc2gpst (gtime_t t);
 extern gtime_t gpst2bdt (gtime_t t);
 extern gtime_t bdt2gpst (gtime_t t);
-__attribute__ ((visibility ("default"))) extern gtime_t timeget  (void);
+extern gtime_t timeget  (void);
 extern void    timeset  (gtime_t t);
 extern double  time2doy (gtime_t t);
 extern double  utc2gmst (gtime_t t, double ut1_utc);
@@ -1630,8 +1630,8 @@ extern gtime_t strgettime(stream_t *stream);
 extern void strsendnmea(stream_t *stream, const double *pos);
 extern void strsendcmd(stream_t *stream, const char *cmd);
 extern void strsettimeout(stream_t *stream, int toinact, int tirecon);
-__attribute__ ((visibility ("default"))) extern void strsetdir(const char *dir);
-__attribute__ ((visibility ("default"))) extern void strsetproxy(const char *addr);
+extern void strsetdir(const char *dir);
+extern void strsetproxy(const char *addr);
 
 /* integer ambiguity resolution ----------------------------------------------*/
 extern int lambda(int n, int m, const double *a, const double *Q, double *F,
@@ -1665,15 +1665,15 @@ extern int postpos(gtime_t ts, gtime_t te, double ti, double tu,
                    const char *rov, const char *base);
 
 /* stream server functions ---------------------------------------------------*/
-__attribute__ ((visibility ("default"))) extern void strsvrinit (strsvr_t *svr, int nout);
-__attribute__ ((visibility ("default"))) extern int  strsvrstart(strsvr_t *svr, int *opts, int *strs, char **paths,
+extern void strsvrinit (strsvr_t *svr, int nout);
+extern int  strsvrstart(strsvr_t *svr, int *opts, int *strs, char **paths,
                         strconv_t **conv, const char *cmd,
                         const double *nmeapos);
-__attribute__ ((visibility ("default"))) extern void strsvrstop (strsvr_t *svr, const char *cmd);
-__attribute__ ((visibility ("default"))) extern void strsvrstat (strsvr_t *svr, int *stat, int *byte, int *bps, char *msg);
-__attribute__ ((visibility ("default"))) extern strconv_t *strconvnew(int itype, int otype, const char *msgs, int staid,
+extern void strsvrstop (strsvr_t *svr, const char *cmd);
+extern void strsvrstat (strsvr_t *svr, int *stat, int *byte, int *bps, char *msg);
+extern strconv_t *strconvnew(int itype, int otype, const char *msgs, int staid,
                              int stasel, const char *opt);
-__attribute__ ((visibility ("default"))) extern void strconvfree(strconv_t *conv);
+extern void strconvfree(strconv_t *conv);
 
 /* rtk server functions ------------------------------------------------------*/
 extern int  rtksvrinit  (rtksvr_t *svr);
